@@ -3,7 +3,6 @@ import { start } from "../src/oddServer.mjs";
 import axios from 'axios';
 import fp from 'find-free-port';
 import fs from 'fs';
-import { markAsUntransferable } from "worker_threads";
 
 
 const getPort = () => {
@@ -28,13 +27,13 @@ describe("Test without refactor", () => {
     }
   }) 
 
-  it("Can open url", async () => {
-    const result = await axios.get('http://localhost:' + port);
-    expect(result.data).to.equal("Created text.")
-  })
-
   describe("Creates a document", () => {
     
+    it("Can open url", async () => {
+      const result = await axios.get('http://localhost:' + port);
+      expect(result.data).to.equal("Created text.")
+    })
+
     it("Document exists", () => {
       expect(fs.existsSync('test/temp/testDoc.txt')).to.equal(true);
     })
@@ -50,7 +49,6 @@ describe("Test without refactor", () => {
     })
   
   })
-
 
   it("Returns an object", () => {
     expect(start('name', 0)).to.be.an('object');
