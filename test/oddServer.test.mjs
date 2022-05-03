@@ -14,7 +14,7 @@ describe("Test without refactor", () => {
   before(async () => {
     port = await getPort();
     port = port[0];
-    start('Starting up.', port);
+    start('test/temp/testDoc', port);
   })
 
   it("Can open url", async () => {
