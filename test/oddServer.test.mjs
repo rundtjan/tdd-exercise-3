@@ -3,6 +3,7 @@ import { start } from "../src/oddServer.mjs";
 import axios from 'axios';
 import fp from 'find-free-port';
 import fs from 'fs';
+import { markAsUntransferable } from "worker_threads";
 
 
 const getPort = () => {
@@ -16,7 +17,16 @@ describe("Test without refactor", () => {
     port = await getPort();
     port = port[0];
     start('test/temp/testDoc', port);
+    if (fs.existsSync('test/temp/testDoc.txt')){
+      fs.unlinkSync('test/temp/testDoc.txt');
+    }
   })
+
+  after(() => {
+    if (fs.existsSync('test/temp/testDoc.txt')){
+      fs.unlinkSync('test/temp/testDoc.txt');
+    }
+  }) 
 
   it("Can open url", async () => {
     const result = await axios.get('http://localhost:' + port);
