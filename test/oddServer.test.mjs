@@ -33,9 +33,24 @@ describe("Test without refactor", () => {
     expect(result.data).to.equal("Created text.")
   })
 
-  it("Creates a document", async() => {
-    expect(fs.existsSync('test/temp/testDoc.txt')).to.equal(true);
+  describe("Creates a document", () => {
+    
+    it("Document exists", () => {
+      expect(fs.existsSync('test/temp/testDoc.txt')).to.equal(true);
+    })
+
+    it("Content of document is correct", () => {
+      let randomTexts = ['A fun text.', 'A sad text.', 'A really kind text.'];
+      let timeTexts = [' In the evening', ' In the early hours'];
+      const data = fs.readFileSync('test/temp/testDoc.txt', {encoding:'utf8', flag:'r'});
+      const randomText = data.split('.')[0] + '.';
+      const timeText = data.split('.')[1];
+      expect(randomTexts.includes(randomText)).to.equal(true);
+      expect(timeTexts.includes(timeText)).to.equal(true);
+    })
+  
   })
+
 
   it("Returns an object", () => {
     expect(start('name', 0)).to.be.an('object');
