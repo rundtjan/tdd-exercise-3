@@ -2,6 +2,7 @@ import { expect } from "chai";
 import { start } from "../src/oddServer.mjs";
 import axios from 'axios';
 import fp from 'find-free-port';
+import fs from 'fs';
 
 
 const getPort = () => {
@@ -20,6 +21,10 @@ describe("Test without refactor", () => {
   it("Can open url", async () => {
     const result = await axios.get('http://localhost:' + port);
     expect(result.data).to.equal("Created text.")
+  })
+
+  it("Creates a document", async() => {
+    expect(fs.existsSync('test/temp/testDoc.txt')).to.equal(true);
   })
 
   it("Returns an object", () => {
