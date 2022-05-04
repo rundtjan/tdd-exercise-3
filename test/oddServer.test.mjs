@@ -31,7 +31,13 @@ describe("Test without refactor", () => {
     
     it("Can open url", async () => {
       const result = await axios.get('http://localhost:' + port);
-      expect(result.data).to.equal("Created text.")
+      console.log(result);
+      expect(result.status).to.equal(200);
+    })
+
+    it("Url has correct content", async () => {
+      const result = await axios.get('http://localhost:' + port);
+      expect(result.data).to.equal('Created text.');
     })
 
     it("Document exists", () => {
