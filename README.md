@@ -1,6 +1,6 @@
-# New JavaScript Project
+# An odd server function
 
-An empty project with JavaScript testing tools preconfigured. Do whatever you like with it.
+Written only to enable writing tests for cases that are considered hard to test. For a course in TDD at Hki uni.
 
 ## Prerequisites
 
