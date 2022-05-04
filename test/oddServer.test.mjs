@@ -38,7 +38,7 @@ describe("Test without refactor", () => {
       expect(fs.existsSync('test/temp/testDoc.txt')).to.equal(true);
     })
 
-    it("Content of document is correct", () => {
+    it("The content of the document is correct", () => {
       let randomTexts = ['A fun text.', 'A sad text.', 'A really kind text.'];
       let timeTexts = [' In the evening', ' In the early hours'];
       const data = fs.readFileSync('test/temp/testDoc.txt', {encoding:'utf8', flag:'r'});
@@ -61,8 +61,15 @@ describe("Test without refactor", () => {
     expect(contents.filter(elem => elem === contents[0]).length).to.be.below(100);
   });
 
+  it("Returns correct time of day", () => {
+    const d = new Date();
+    const result = start('name', 0);
+    expect(result.d.getDay()).to.equal(d.getDay());
+    expect(result.d.getHours()).to.equal(d.getHours());
+  });
+
   it("Identifies time of day", () => {
-    let d = new Date()
+    let d = new Date();
     let expected = '';
     d.getHours() > 17 ? expected = "evening." : expected ="early";
     expect(start('name', 0).content.split(" ").includes(expected)).to.equal(true);
